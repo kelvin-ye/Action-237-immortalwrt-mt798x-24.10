@@ -67,10 +67,12 @@ jobs:
 
     - name: Update feeds
       run: |
-         cd openwrt
-         ./scripts/feeds update -a
-         rm -rf feeds/packages/lang/golang
-         git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+        cd openwrt
+        ./scripts/feeds update -a
+
+        # 更新 golang 1.25 版本
+        rm -rf feeds/packages/lang/golang
+        git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/lang/golang
 
 
     - name: Install feeds
@@ -88,7 +90,7 @@ jobs:
          
     - name: Load custom configuration
       run: |
-        # [ -e files ] && mv files openwrt/files
+        [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
         cd openwrt
