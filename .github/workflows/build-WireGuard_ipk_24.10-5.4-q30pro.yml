@@ -105,15 +105,12 @@ jobs:
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
-    - name:  Compile WireGuard ipk
+    - name: Compile WireGuard ipk
       id: compile
       run: |
         cd openwrt
-      # 内核模块
         make package/kmod-wireguard/compile V=s
-      # 用户空间工具
         make package/wireguard-tools/compile V=s
-    # LuCI 接口
         make package/luci-proto-wireguard/compile V=s
         echo -e "$(nproc) thread compile"
         echo "status=success" >> $GITHUB_OUTPUT
