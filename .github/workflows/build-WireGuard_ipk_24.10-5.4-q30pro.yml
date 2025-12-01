@@ -123,7 +123,7 @@ jobs:
       run: df -hT
 
     - name: Upload WireGuard ipk
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: wireguard-ipk
         path: openwrt/bin/packages/*/*/wireguard*
